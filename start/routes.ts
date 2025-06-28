@@ -8,9 +8,12 @@
 */
 
 import router from '@adonisjs/core/services/router'
+import './routes/auth.js'
 
+// Routes publiques
 router.get('/', async () => {
   return {
-    hello: 'world',
+    message: 'API Doc Car - Bienvenue!',
+    version: '1.0.0'
   }
 })

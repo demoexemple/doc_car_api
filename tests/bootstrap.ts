@@ -4,6 +4,8 @@ import app from '@adonisjs/core/services/app'
 import type { Config } from '@japa/runner/types'
 import { pluginAdonisJS } from '@japa/plugin-adonisjs'
 import testUtils from '@adonisjs/core/services/test_utils'
+import { Ignitor, prettyPrintError } from '@adonisjs/core'
+import { configure, processCLIArgs, run } from '@japa/runner'
 
 /**
  * This file is imported by the "bin/test.ts" entrypoint file
@@ -36,3 +38,52 @@ export const configureSuite: Config['configureSuite'] = (suite) => {
     return suite.setup(() => testUtils.httpServer().start())
   }
 }
+
+/**
+ * URL to the AdonisJS app root. AdonisJS will first
+ * look for this file to boot the application
+ */
+const APP_ROOT = new URL('../', import.meta.url)
+
+/**
+ * Run the tests
+ */
+async function runTests() {
+  const ignitor = new Ignitor(APP_ROOT, {
+    importer: (filePath) => {
+      if (filePath.startsWith('./') || filePath.startsWith('../')) {
+        return import(new URL(filePath, APP_ROOT).href)
+      }
+      return import(filePath)
+    },
+  })
+
+  await ignitor.boot()
+
+  /**
+   * Configure tests
+   */
+  configure({
+    files: ['tests/**/*.spec.ts'],
+    plugins: [
+      await ignitor.testing().plugin(),
+    ],
+    forceExit: false,
+  })
+
+  /**
+   * Process CLI arguments
+   */
+  processCLIArgs(process.argv.slice(2))
+
+  /**
+   * Run tests
+   */
+  await run()
+}
+
+runTests().catch((error) => {
+  console.error('Error occurred during tests')
+  prettyPrintError(error)
+  process.exit(1)
+})

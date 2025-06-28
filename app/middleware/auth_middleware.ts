@@ -1,6 +1,5 @@
-import type { HttpContext } from '@adonisjs/core/http'
-import type { NextFn } from '@adonisjs/core/types/http'
-import type { Authenticators } from '@adonisjs/auth/types'
+import { HttpContext } from '@adonisjs/core/http'
+import { NextFn } from '@adonisjs/core/types/http'
 
 /**
  * Auth middleware is used authenticate HTTP requests and deny
@@ -12,14 +11,15 @@ export default class AuthMiddleware {
    */
   redirectTo = '/login'
 
-  async handle(
-    ctx: HttpContext,
-    next: NextFn,
-    options: {
-      guards?: (keyof Authenticators)[]
-    } = {}
-  ) {
-    await ctx.auth.authenticateUsing(options.guards, { loginRoute: this.redirectTo })
-    return next()
+  async handle(ctx: HttpContext, next: NextFn) {
+    try {
+      await ctx.auth.authenticate()
+      return next()
+    } catch (error) {
+      return ctx.response.status(401).json({
+        success: false,
+        message: 'Token d\'authentification invalide ou manquant'
+      })
+    }
   }
 }

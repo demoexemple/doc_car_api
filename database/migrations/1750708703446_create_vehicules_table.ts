@@ -10,9 +10,7 @@ export default class extends BaseSchema {
       table.string('modele', 255).notNullable()
       table.string('type', 255).notNullable()
       table.string('usages', 255).nullable()
-      // If proprietaire is an ID referencing another table (e.g., users), uncomment and adjust:
-      table.integer('proprietaire_id').unsigned().references('id').inTable('conducters').onDelete('SET NULL').nullable()
-      // table.integer('proprietaire').nullable() // If it's just a number without a foreign key constraint
+      table.integer('proprietaire_id').unsigned().references('id').inTable('users').onDelete('SET NULL').nullable()
 
       table.timestamp('created_at', { useTz: true }).notNullable()
       table.timestamp('updated_at', { useTz: true }).nullable()
