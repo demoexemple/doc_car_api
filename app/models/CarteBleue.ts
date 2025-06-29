@@ -12,19 +12,20 @@ export default class CarteBleue extends BaseModel {
   declare numero: string
 
   @column()
-  declare typeTransport: string
+  declare type: string
 
   @column()
-  declare nomExploitant: string
-
-  @column() // Changed to column.date()
   declare dateDelivrance: Date
 
-  @column() // Changed to column.date()
+  @column()
   declare dateExpiration: Date
 
+
   @column()
-  declare photo: string
+  declare documentPdf: string
+
+  @column()
+  declare vehiculeId: number
 
   @belongsTo(() => Vehicule)
   declare vehicule: BelongsTo<typeof Vehicule>

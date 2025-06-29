@@ -9,19 +9,22 @@ export default class Assurance extends BaseModel {
   declare id: number
 
   @column()
+  declare numeroContrat: string
+
+  @column()
   declare companie: string
 
   @column()
-  declare numeroContrat: string
-
-  @column() // Changed to column.date()
   declare dateDebut: Date
 
-  @column() // Changed to column.date()
+  @column()
   declare dateExpiration: Date
 
   @column()
   declare documentPdf: string
+
+  @column()
+  declare vehiculeId: number
 
   @belongsTo(() => Vehicule)
   declare vehicule: BelongsTo<typeof Vehicule>

@@ -1,14 +1,15 @@
 // Vehicule.ts
-import { BaseModel, column, hasOne, manyToMany, belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, manyToMany, belongsTo } from '@adonisjs/lucid/orm'
 import CarteGrise from './CarteGrise.js'
 import Assurance from './Assurance.js'
 import Vignette from './Vignette.js'
 import VisiteTechnique from './VisiteTechnique.js'
-import type { HasOne, ManyToMany, BelongsTo } from '@adonisjs/lucid/types/relations'
+import type { HasMany, ManyToMany, BelongsTo } from '@adonisjs/lucid/types/relations'
 import CarteBleue from './CarteBleue.js'
 import { DateTime } from 'luxon'
 import Conducteur from './Conducteur.js'
 import User from './user.js'
+import { idText } from 'typescript'
 
 export default class Vehicule extends BaseModel {
   @column({ isPrimary: true })
@@ -26,29 +27,43 @@ export default class Vehicule extends BaseModel {
   @column()
   declare usages: string
 
-  @belongsTo(() => User)
-  declare proprietaire: BelongsTo<typeof User>
+  @column()
+  declare immatriculation: string
 
-  @manyToMany(() => Conducteur, { // Renamed from conducteursAccess for clarity
+  @column()
+  declare annee: number
+
+  @column()
+  declare couleur: string
+
+  @column({columnName:'proprietaire_id'})
+  declare proprietaireId: number
+
+  @belongsTo(() => Conducteur,{
+    foreignKey:'proprietaireId',
+    localKey:'id'
+  })
+  declare proprietaire: BelongsTo<typeof Conducteur>
+
+  @manyToMany(() => Conducteur, {
     pivotTable: 'vehicule_conducteurs',
   })
   declare conducteurs: ManyToMany<typeof Conducteur>
 
+  @hasMany(() => CarteGrise)
+  declare carteGrise: HasMany<typeof CarteGrise>
 
-  @hasOne(() => CarteGrise)
-  declare carteGrise: HasOne<typeof CarteGrise>
+  @hasMany(() => Assurance)
+  declare assurance: HasMany<typeof Assurance>
 
-  @hasOne(() => Assurance)
-  declare assurance: HasOne<typeof Assurance>
+  @hasMany(() => Vignette)
+  declare vignette: HasMany<typeof Vignette>
 
-  @hasOne(() => Vignette)
-  declare vignette: HasOne<typeof Vignette>
+  @hasMany(() => CarteBleue)
+  declare carteBleue: HasMany<typeof CarteBleue>
 
-  @hasOne(() => CarteBleue)
-  declare carteBleu: HasOne<typeof CarteBleue>
-
-  @hasOne(() => VisiteTechnique)
-  declare visiteTechnique: HasOne<typeof VisiteTechnique>
+  @hasMany(() => VisiteTechnique)
+  declare visiteTechnique: HasMany<typeof VisiteTechnique>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

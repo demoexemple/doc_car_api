@@ -7,11 +7,10 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id').notNullable()
       table.string('numero', 255).notNullable().unique()
-      table.string('type_transport', 255).notNullable()
-      table.string('nom_exploitant', 255).nullable()
+      table.string('type', 255).notNullable()
       table.date('date_delivrance').notNullable() // Using date type
       table.date('date_expiration').notNullable() // Using date type
-      table.string('photo', 255).nullable() // Assuming file path
+      table.string('document_pdf', 255).nullable() // Assuming file path
 
       table.integer('vehicule_id').unsigned().references('id').inTable('vehicules').onDelete('CASCADE').notNullable()
 

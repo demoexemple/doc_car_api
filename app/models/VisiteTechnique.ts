@@ -8,17 +8,21 @@ export default class VisiteTechnique extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-  @column() // Changed to column.date()
-  declare dateDernierControle: Date
-
-  @column() // Changed to column.date()
-  declare dateExpirationControle: Date
-
   @column()
   declare centre: string
 
   @column()
+  declare dateDernierControle: Date
+
+  @column()
+  declare dateExpirationControle: Date
+
+
+  @column()
   declare documentPdf: string
+
+  @column()
+  declare vehiculeId: number
 
   @belongsTo(() => Vehicule)
   declare vehicule: BelongsTo<typeof Vehicule>

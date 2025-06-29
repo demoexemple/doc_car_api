@@ -9,13 +9,19 @@ export default class Vignette extends BaseModel {
   declare id: number
 
   @column()
-  declare montant: number // Consider changing to number for precision, or declare as string/Decimal
-
-  @column() // Changed to column.date()
   declare dateDelivrance: Date
 
-  @column() // Changed to column.date()
+  @column()
   declare dateExpiration: Date
+
+  @column()
+  declare montant: number
+
+  @column()
+  declare documentPdf: string
+
+  @column()
+  declare vehiculeId: number
 
   @belongsTo(() => Vehicule)
   declare vehicule: BelongsTo<typeof Vehicule>

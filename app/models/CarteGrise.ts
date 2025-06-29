@@ -12,16 +12,19 @@ export default class CarteGrise extends BaseModel {
   declare numero: string
 
   @column()
-  declare immatriculation: string
+  declare immatriculation:string
 
-  @column() // Changed to column.date()
+  @column()
   declare dateDelivrance: Date
 
-  @column() // Changed to column.date()
+  @column()
   declare dateExpiration: Date
 
   @column()
   declare documentPdf: string
+
+  @column()
+  declare vehiculeId: number
 
   @belongsTo(() => Vehicule)
   declare vehicule: BelongsTo<typeof Vehicule>
