@@ -23,6 +23,9 @@ export default class PermisDeConduire extends BaseModel {
   @column()
   declare documentPdf: string
 
+  @column()
+  declare conducteurId: number
+
   @belongsTo(() => Conducteur)
   declare conducteur: BelongsTo<typeof Conducteur>
 

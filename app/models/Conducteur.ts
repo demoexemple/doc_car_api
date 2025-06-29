@@ -1,6 +1,6 @@
 // Conducteur.ts
-import { BaseModel, column, hasOne, manyToMany } from '@adonisjs/lucid/orm'
-import type { HasOne, ManyToMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasMany, hasOne, manyToMany } from '@adonisjs/lucid/orm'
+import type { HasMany, HasOne, ManyToMany } from '@adonisjs/lucid/types/relations'
 import PermisDeConduire from './PermisDeConduire.js'
 import Vehicule from './Vehicule.js' // Import Vehicule
 import { DateTime } from 'luxon'
@@ -33,8 +33,8 @@ export default class Conducteur extends BaseModel {
   @column()
   declare profilImage: string
 
-  @hasOne(() => PermisDeConduire)
-  declare permisDeConduire: HasOne<typeof PermisDeConduire>
+  @hasMany(() => PermisDeConduire)
+  declare permisDeConduire: HasMany<typeof PermisDeConduire>
 
   // Corrected Many-to-Many relationship with Vehicule
   @manyToMany(() => Vehicule, {
