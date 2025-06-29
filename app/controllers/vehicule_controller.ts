@@ -382,6 +382,7 @@ export default class VehiculeController {
         data: stats
       })
     } catch (error) {
+      console.log(error)
       return response.status(500).json({
         success: false,
         message: 'Erreur lors de la récupération des statistiques'

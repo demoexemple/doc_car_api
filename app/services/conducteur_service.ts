@@ -88,8 +88,13 @@ export class ConducteurService {
   async getById(id: number) {
     const conducteur = await Conducteur.findOrFail(id)
     
-    // Charger les relations
-    await conducteur.load('vehicules')
+    // Charger les relations avec les relations imbriquées des véhicules
+    await conducteur.load('vehicules', (query) => {
+      query.preload('assurance')
+      query.preload('carteBleue')
+      query.preload('vignette')
+      query.preload('visiteTechnique')
+    })
     await conducteur.load('permisDeConduire')
 
     return conducteur

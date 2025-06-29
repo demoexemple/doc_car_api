@@ -25,38 +25,31 @@ Crée un nouveau véhicule avec tous ses documents associés en une seule requê
   "modele": "Clio",
   "type": "Citadine",
   "usages": "Personnel",
-  "immatriculation": "AB-123-CD",
-  "annee": 2020,
-  "couleur": "Blanc",
-  "proprietaireId": 1,
+  "proprietaireId": 4,
   "carteGrise": {
     "numero": "CG123456789",
     "dateDelivrance": "2020-01-15",
     "dateExpiration": "2030-01-15",
-    "documentPdf": "path/to/carte_grise.pdf"
+    "documentPdf": "path/to/carte_grise.pdf",
+    "immatriculation": "AB-123-CD"
   },
   "assurance": {
-    "numero": "ASS123456789",
-    "compagnie": "AXA",
+    "numeroContrat": "ASS123456789",
+    "companie": "AXA",
     "dateDebut": "2024-01-01",
-    "dateFin": "2025-01-01",
-    "montant": 500.00,
+    "dateExpiration": "2025-01-01",
     "documentPdf": "path/to/assurance.pdf"
   },
   "vignette": {
-    "numero": "VIG123456789",
     "dateDelivrance": "2024-01-01",
     "dateExpiration": "2024-12-31",
     "montant": 150.00,
     "documentPdf": "path/to/vignette.pdf"
   },
   "visiteTechnique": {
-    "numero": "VT123456789",
     "centre": "Centre Technique Auto",
-    "dateVisite": "2024-01-15",
-    "dateExpiration": "2025-01-15",
-    "resultat": "Favorable",
-    "observations": "Véhicule en bon état",
+    "dateDernierControle": "2024-01-15",
+    "dateExpirationControle": "2025-01-15",
     "documentPdf": "path/to/visite_technique.pdf"
   },
   "carteBleue": {
@@ -64,7 +57,6 @@ Crée un nouveau véhicule avec tous ses documents associés en une seule requê
     "type": "Essence",
     "dateDelivrance": "2024-01-01",
     "dateExpiration": "2024-12-31",
-    "montant": 200.00,
     "documentPdf": "path/to/carte_bleue.pdf"
   }
 }

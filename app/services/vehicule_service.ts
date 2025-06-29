@@ -27,7 +27,7 @@ export interface VehiculeStats {
   parType: Record<string, number>
   parMarque: Record<string, number>
   recents: number
-  parAnnee: Record<string, number>
+  // parAnnee: Record<string, number>
 }
 
 @inject()
@@ -46,6 +46,10 @@ export class VehiculeService {
 
     // Créer le véhicule
     const vehicule = await Vehicule.create(vehiculeData)
+
+    // await vehicule.related('proprietaire').associate(proprietaire)
+
+    await vehicule.related('conducteurs').attach([vehiculeData.proprietaireId])
 
     // Charger les relations
     await vehicule.load('proprietaire')
@@ -345,11 +349,11 @@ export class VehiculeService {
       .count('* as recents') as unknown as Array<{ $extras: { recents: number } }>
 
     // Véhicules par année
-    const vehiculesParAnnee = await Vehicule.query()
-      .select('annee')
-      .count('* as count')
-      .groupBy('annee')
-      .orderBy('annee', 'desc') as unknown as Array<{ annee: number; $extras: { count: number } }>
+    // const vehiculesParAnnee = await Vehicule.query()
+    //   .select('annee')
+    //   .count('* as count')
+    //   .groupBy('annee')
+    //   .orderBy('annee', 'desc') as unknown as Array<{ annee: number; $extras: { count: number } }>
 
     return {
       total: totalVehicules[0].$extras.total,
@@ -362,10 +366,10 @@ export class VehiculeService {
         return acc
       }, {} as Record<string, number>),
       recents: vehiculesRecents[0].$extras.recents,
-      parAnnee: vehiculesParAnnee.reduce((acc, annee) => {
-        acc[annee.annee.toString()] = annee.$extras.count
-        return acc
-      }, {} as Record<string, number>)
+      // parAnnee: vehiculesParAnnee.reduce((acc, annee) => {
+      //   acc[annee.annee.toString()] = annee.$extras.count
+      //   return acc
+      // }, {} as Record<string, number>)
     }
   }
 } 
