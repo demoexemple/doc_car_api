@@ -39,9 +39,9 @@ export class PermisDeConduireService {
     }
 
     // Vérifier si le conducteur a déjà un permis
-    const existingConducteurPermis = await PermisDeConduire.findBy('conducteurId', permisData.conducteurId)
+    const existingConducteurPermis = await PermisDeConduire.query().select(['id']).where('conducteurId', permisData.conducteurId).andWhere('categorie',permisData.categorie)
     if (existingConducteurPermis) {
-      throw new Error('Ce conducteur possède déjà un permis de conduire')
+      throw new Error('Ce conducteur possède déjà un permis de conduire de cette categorie')
     }
 
     // Vérifier les dates
