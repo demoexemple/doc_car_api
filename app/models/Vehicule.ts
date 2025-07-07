@@ -1,10 +1,10 @@
 // Vehicule.ts
-import { BaseModel, column, hasMany, manyToMany, belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, manyToMany, belongsTo, hasOne } from '@adonisjs/lucid/orm'
 import CarteGrise from './CarteGrise.js'
 import Assurance from './Assurance.js'
 import Vignette from './Vignette.js'
 import VisiteTechnique from './VisiteTechnique.js'
-import type { HasMany, ManyToMany, BelongsTo } from '@adonisjs/lucid/types/relations'
+import type { HasMany, ManyToMany, BelongsTo, HasOne } from '@adonisjs/lucid/types/relations'
 import CarteBleue from './CarteBleue.js'
 import { DateTime } from 'luxon'
 import Conducteur from './Conducteur.js'
@@ -27,14 +27,14 @@ export default class Vehicule extends BaseModel {
   @column()
   declare usages: string
 
-  @column()
-  declare immatriculation: string
+  // @column()
+  // declare immatriculation: string
 
-  @column()
-  declare annee: number
+  // @column()
+  // declare annee: number
 
-  @column()
-  declare couleur: string
+  // @column()
+  // declare couleur: string
 
   @column({columnName:'proprietaire_id'})
   declare proprietaireId: number
@@ -50,8 +50,8 @@ export default class Vehicule extends BaseModel {
   })
   declare conducteurs: ManyToMany<typeof Conducteur>
 
-  @hasMany(() => CarteGrise)
-  declare carteGrise: HasMany<typeof CarteGrise>
+  @hasOne(() => CarteGrise)
+  declare carteGrise: HasOne<typeof CarteGrise>
 
   @hasMany(() => Assurance)
   declare assurance: HasMany<typeof Assurance>

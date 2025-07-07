@@ -71,6 +71,7 @@ export class VehiculeService {
     let queryBuilder = Vehicule.query()
       .preload('proprietaire')
       .preload('conducteurs')
+      .preload('carteGrise')
 
     if (search) {
       queryBuilder = queryBuilder.where((builder) => {
@@ -148,10 +149,9 @@ export class VehiculeService {
     const vehicule = await Vehicule.findOrFail(id)
 
     // Vérifier si l'immatriculation est déjà utilisée par un autre véhicule
-    if (updateData.immatriculation && updateData.immatriculation !== vehicule.immatriculation) {
+    if (updateData.immatriculation && updateData.immatriculation ) {
       const existingVehicule = await Vehicule.query()
-        .where('immatriculation', updateData.immatriculation)
-        .whereNot('id', id)
+        .where('id', id)
         .first()
       
       if (existingVehicule) {
