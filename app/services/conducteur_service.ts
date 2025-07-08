@@ -8,7 +8,7 @@ export interface ConducteurData {
   nom: string
   adresse?: string
   telephone: string
-  numCNI: string
+  numCni: string
   frontCni?: string
   backCni?: string
   profilImage?: string
@@ -19,7 +19,7 @@ export interface UpdateConducteurData {
   nom?: string
   adresse?: string
   telephone?: string
-  numCNI?: string
+  numCni?: string
   frontCni?: string
   backCni?: string
   profilImage?: string
@@ -32,7 +32,7 @@ export class ConducteurService {
    */
   async create(conducteurData: ConducteurData) {
     // Vérifier si le numéro CNI existe déjà
-    const existingConducteur = await Conducteur.findBy('numCNI', conducteurData.numCNI)
+    const existingConducteur = await Conducteur.findBy('numCni', conducteurData.numCni)
     if (existingConducteur) {
       throw new Error('Un conducteur avec ce numéro CNI existe déjà')
     }
@@ -70,7 +70,7 @@ export class ConducteurService {
         builder
           .whereILike('prenom', `%${search}%`)
           .orWhereILike('nom', `%${search}%`)
-          .orWhereILike('numCNI', `%${search}%`)
+          .orWhereILike('numCni', `%${search}%`)
           .orWhereILike('telephone', `%${search}%`)
       })
     }
@@ -94,6 +94,7 @@ export class ConducteurService {
       query.preload('carteBleue')
       query.preload('vignette')
       query.preload('visiteTechnique')
+      query.preload('carteGrise')
     })
     await conducteur.load('permisDeConduire')
 
@@ -107,9 +108,9 @@ export class ConducteurService {
     const conducteur = await Conducteur.findOrFail(id)
 
     // Vérifier si le numéro CNI est déjà utilisé par un autre conducteur
-    if (updateData.numCNI && updateData.numCNI !== conducteur.numCNI) {
+    if (updateData.numCni && updateData.numCni !== conducteur.numCni) {
       const existingConducteur = await Conducteur.query()
-        .where('numCNI', updateData.numCNI)
+        .where('numCni', updateData.numCni)
         .whereNot('id', id)
         .first()
       
@@ -220,7 +221,7 @@ export class ConducteurService {
         builder
           .whereILike('prenom', `%${searchTerm}%`)
           .orWhereILike('nom', `%${searchTerm}%`)
-          .orWhereILike('numCNI', `%${searchTerm}%`)
+          .orWhereILike('numCni', `%${searchTerm}%`)
           .orWhereILike('telephone', `%${searchTerm}%`)
       })
       .preload('vehicules')

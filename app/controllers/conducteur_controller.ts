@@ -15,7 +15,7 @@ export default class ConducteurController {
     try {
       const conducteurData = request.only([
         'prenom', 'nom', 'adresse', 'telephone', 
-        'numCNI', 'frontCni', 'backCni', 'profilImage'
+        'numCni', 'frontCni', 'backCni', 'profilImage'
       ])
 
       const validPayload=await createConducteurValidator.validate(conducteurData)
@@ -89,7 +89,7 @@ export default class ConducteurController {
     try {
       const updateData = request.only([
         'prenom', 'nom', 'adresse', 'telephone', 
-        'numCNI', 'frontCni', 'backCni', 'profilImage'
+        'numCni', 'frontCni', 'backCni', 'profilImage'
       ])
       
       const conducteur = await this.conducteurService.update(params.id, updateData)

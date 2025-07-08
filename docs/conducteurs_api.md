@@ -25,7 +25,7 @@ Crée un nouveau conducteur.
   "nom": "Dupont",
   "adresse": "123 Rue de la Paix, Paris",
   "telephone": "+33123456789",
-  "numCNI": "1234567890123456",
+  "numCni": "1234567890123456",
   "frontCni": "path/to/front.jpg",
   "backCni": "path/to/back.jpg",
   "profilImage": "path/to/profile.jpg"
@@ -37,7 +37,7 @@ Crée un nouveau conducteur.
 - `nom` (requis) : Nom du conducteur
 - `adresse` (optionnel) : Adresse du conducteur
 - `telephone` (requis) : Numéro de téléphone unique
-- `numCNI` (requis) : Numéro de carte nationale d'identité unique
+- `numCni` (requis) : Numéro de carte nationale d'identité unique
 - `frontCni` (optionnel) : Chemin vers l'image recto de la CNI
 - `backCni` (optionnel) : Chemin vers l'image verso de la CNI
 - `profilImage` (optionnel) : Chemin vers l'image de profil
@@ -53,7 +53,7 @@ Crée un nouveau conducteur.
     "nom": "Dupont",
     "adresse": "123 Rue de la Paix, Paris",
     "telephone": "+33123456789",
-    "numCNI": "1234567890123456",
+    "numCni": "1234567890123456",
     "frontCni": "path/to/front.jpg",
     "backCni": "path/to/back.jpg",
     "profilImage": "path/to/profile.jpg",
@@ -93,7 +93,7 @@ Récupère la liste paginée des conducteurs.
         "prenom": "Jean",
         "nom": "Dupont",
         "telephone": "+33123456789",
-        "numCNI": "1234567890123456",
+        "numCni": "1234567890123456",
         "createdAt": "2024-01-01T00:00:00.000Z"
       }
     ]
@@ -117,7 +117,7 @@ Récupère les détails d'un conducteur spécifique.
     "nom": "Dupont",
     "adresse": "123 Rue de la Paix, Paris",
     "telephone": "+33123456789",
-    "numCNI": "1234567890123456",
+    "numCni": "1234567890123456",
     "frontCni": "path/to/front.jpg",
     "backCni": "path/to/back.jpg",
     "profilImage": "path/to/profile.jpg",
@@ -273,7 +273,7 @@ Recherche des conducteurs par nom, prénom, numéro CNI ou téléphone.
       "prenom": "Jean",
       "nom": "Dupont",
       "telephone": "+33123456789",
-      "numCNI": "1234567890123456"
+      "numCni": "1234567890123456"
     }
   ]
 }

@@ -9,7 +9,7 @@ export const createConducteurValidator = vine.compile(
     nom: vine.string().trim().minLength(2).maxLength(100),
     adresse: vine.string().trim().maxLength(255).optional(),
     telephone: vine.string().trim().minLength(8).maxLength(20),
-    numCNI: vine.string().trim().minLength(5).maxLength(50),
+    numCni: vine.string().trim().minLength(5).maxLength(50),
     frontCni: vine.string().trim().maxLength(255).optional(),
     backCni: vine.string().trim().maxLength(255).optional(),
     profilImage: vine.string().trim().maxLength(255).optional()
@@ -25,7 +25,7 @@ export const updateConducteurValidator = vine.compile(
     nom: vine.string().trim().minLength(2).maxLength(100).optional(),
     adresse: vine.string().trim().maxLength(255).optional(),
     telephone: vine.string().trim().minLength(8).maxLength(20).optional(),
-    numCNI: vine.string().trim().minLength(5).maxLength(50).optional(),
+    numCni: vine.string().trim().minLength(5).maxLength(50).optional(),
     frontCni: vine.string().trim().maxLength(255).optional(),
     backCni: vine.string().trim().maxLength(255).optional(),
     profilImage: vine.string().trim().maxLength(255).optional()

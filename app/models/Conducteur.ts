@@ -22,7 +22,7 @@ export default class Conducteur extends BaseModel {
   declare telephone: string
 
   @column()
-  declare numCNI: string
+  declare numCni: string
 
   @column()
   declare frontCni: string
