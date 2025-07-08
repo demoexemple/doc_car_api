@@ -159,6 +159,11 @@ export class PermisDeConduireService {
       }
     }
 
+    const existingConducteurPermis = await PermisDeConduire.query().select(['id','categorie','conducteur_id']).where('id', id).andWhere('categorie',permis.categorie)
+    if (existingConducteurPermis.length && permis.categorie!==updateData?.categorie) {
+      throw new Error('Ce conducteur possède déjà un permis de conduire de cette categorie')
+    }
+
     // Mettre à jour les champs
     permis.merge(updateData)
     await permis.save()
