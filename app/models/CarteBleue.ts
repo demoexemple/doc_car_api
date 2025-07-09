@@ -1,5 +1,5 @@
 // CarteBleue.ts
-import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo, computed } from '@adonisjs/lucid/orm'
 import Vehicule from './Vehicule.js'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
@@ -35,4 +35,10 @@ export default class CarteBleue extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+
+
+  @computed()
+  get isValid(): boolean {
+        return this.dateExpiration > new Date()
+  }
 }

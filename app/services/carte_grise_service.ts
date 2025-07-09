@@ -121,7 +121,7 @@ export class CarteGriseService {
    */
   async getByVehiculeId(vehiculeId: number) {
     const carteGrise = await CarteGrise.findByOrFail('vehiculeId', vehiculeId)
-    await carteGrise.load('vehicule')
+    // await carteGrise.load('vehicule')
     return carteGrise
   }
 

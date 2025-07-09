@@ -1,5 +1,5 @@
 // PermisDeConduire.ts
-import { BaseModel, column, belongsTo } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo, computed } from '@adonisjs/lucid/orm'
 import Conducteur from './Conducteur.js'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
@@ -34,4 +34,9 @@ export default class PermisDeConduire extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+
+  @computed()
+  get isValid(): boolean {
+          return this.dateExpiration > new Date()
+  }
 }

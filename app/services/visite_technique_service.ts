@@ -130,14 +130,13 @@ export class VisiteTechniqueService {
    * Récupérer la visite technique active d'un véhicule
    */
   async getActiveByVehiculeId(vehiculeId: number) {
-    const today = DateTime.now().toJSDate()
+    console.log("dans la visite technique")
     const visite = await VisiteTechnique.query()
-      .where('vehiculeId', vehiculeId)
-      .where('date_expiration_controle', '>=', today)
-      .orderBy('date_expiration_controle', 'desc')
+      .where('vehicule_id', vehiculeId)
       .firstOrFail()
-    
-    await visite.load('vehicule')
+    // await visite.load('vehicule')
+
+    console.log("visite : ",visite)
     return visite
   }
 

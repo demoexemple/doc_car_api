@@ -189,33 +189,69 @@ export class VehiculeService {
    * Mettre à jour un véhicule avec toutes ses relations
    */
   async updateWithRelations(id: number, payload: any) {
-    // Mettre à jour le véhicule principal
-    const vehicule = await this.update(id, payload)
+    // Récupérer le véhicule existant
+    const vehicule = await Vehicule.findOrFail(id)
 
-    // Mettre à jour la carte grise si présente
-    if (payload.carteGrise && payload.carteGrise.id) {
+    // Si le proprietaireId est différent, on le met à jour et on gère la relation conducteur
+    if (payload.proprietaireId && payload.proprietaireId !== vehicule.proprietaireId) {
+      // Retirer l'ancien propriétaire des conducteurs
+      if (vehicule.proprietaireId) {
+        await vehicule.related('conducteurs').detach([vehicule.proprietaireId])
+      }
+      // Ajouter le nouveau propriétaire comme conducteur
+      await vehicule.related('conducteurs').attach([payload.proprietaireId])
+      // Mettre à jour le champ propriétaire
+      vehicule.proprietaireId = payload.proprietaireId
+      await vehicule.save()
+    }
+
+    // Mettre à jour le véhicule principal (autres champs)
+    await this.update(id, payload)
+
+    // Mettre à jour ou créer la carte grise
+    if (payload.carteGrise) {
       const carteGriseService = await import('./carte_grise_service.js').then(m => new m.CarteGriseService())
-      await carteGriseService.update(payload.carteGrise.id, payload.carteGrise)
+      if (payload.carteGrise.id) {
+        await carteGriseService.update(payload.carteGrise.id, payload.carteGrise)
+      } else {
+        await carteGriseService.create({ ...payload.carteGrise, vehiculeId: id })
+      }
     }
-    // Mettre à jour l'assurance si présente
-    if (payload.assurance && payload.assurance.id) {
+    // Mettre à jour ou créer l'assurance
+    if (payload.assurance) {
       const assuranceService = await import('./assurance_service.js').then(m => new m.AssuranceService())
-      await assuranceService.update(payload.assurance.id, payload.assurance)
+      if (payload.assurance.id) {
+        await assuranceService.update(payload.assurance.id, payload.assurance)
+      } else {
+        await assuranceService.create({ ...payload.assurance, vehiculeId: id })
+      }
     }
-    // Mettre à jour la vignette si présente
-    if (payload.vignette && payload.vignette.id) {
+    // Mettre à jour ou créer la vignette
+    if (payload.vignette) {
       const vignetteService = await import('./vignette_service.js').then(m => new m.VignetteService())
-      await vignetteService.update(payload.vignette.id, payload.vignette)
+      if (payload.vignette.id) {
+        await vignetteService.update(payload.vignette.id, payload.vignette)
+      } else {
+        await vignetteService.create({ ...payload.vignette, vehiculeId: id })
+      }
     }
-    // Mettre à jour la visite technique si présente
-    if (payload.visiteTechnique && payload.visiteTechnique.id) {
+    // Mettre à jour ou créer la visite technique
+    if (payload.visiteTechnique) {
       const visiteTechniqueService = await import('./visite_technique_service.js').then(m => new m.VisiteTechniqueService())
-      await visiteTechniqueService.update(payload.visiteTechnique.id, payload.visiteTechnique)
+      if (payload.visiteTechnique.id) {
+        await visiteTechniqueService.update(payload.visiteTechnique.id, payload.visiteTechnique)
+      } else {
+        await visiteTechniqueService.create({ ...payload.visiteTechnique, vehiculeId: id })
+      }
     }
-    // Mettre à jour la carte bleue si présente
-    if (payload.carteBleue && payload.carteBleue.id) {
+    // Mettre à jour ou créer la carte bleue
+    if (payload.carteBleue) {
       const carteBleueService = await import('./carte_bleue_service.js').then(m => new m.CarteBleueService())
-      await carteBleueService.update(payload.carteBleue.id, payload.carteBleue)
+      if (payload.carteBleue.id) {
+        await carteBleueService.update(payload.carteBleue.id, payload.carteBleue)
+      } else {
+        await carteBleueService.create({ ...payload.carteBleue, vehiculeId: id })
+      }
     }
     // Recharger toutes les relations
     await vehicule.load('proprietaire')

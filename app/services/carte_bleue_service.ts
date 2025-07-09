@@ -145,11 +145,8 @@ export class CarteBleueService {
    * Récupérer la carte bleue active d'un véhicule
    */
   async getActiveByVehiculeId(vehiculeId: number) {
-    const today = DateTime.now().toJSDate()
     const carteBleue = await CarteBleue.query()
-      .where('vehiculeId', vehiculeId)
-      .where('dateExpiration', '>=', today)
-      .orderBy('dateExpiration', 'desc')
+      .where('vehicule_id', vehiculeId)
       .firstOrFail()
     
     await carteBleue.load('vehicule')

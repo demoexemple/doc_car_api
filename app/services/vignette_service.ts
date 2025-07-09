@@ -123,11 +123,8 @@ export class VignetteService {
    * Récupérer la vignette active d'un véhicule
    */
   async getActiveByVehiculeId(vehiculeId: number) {
-    const today = DateTime.now().toJSDate()
     const vignette = await Vignette.query()
-      .where('vehiculeId', vehiculeId)
-      .where('dateExpiration', '>=', today)
-      .orderBy('dateExpiration', 'desc')
+      .where('vehicule_id', vehiculeId)
       .firstOrFail()
     
     await vignette.load('vehicule')

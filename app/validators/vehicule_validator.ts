@@ -110,7 +110,7 @@ export const updateVehiculeWithRelationsValidator = vine.compile(
     usages: vine.string().trim().maxLength(100).optional(),
     proprietaireId: vine.number().positive().optional(),
     carteGrise: vine.object({
-      id: vine.number().positive(),
+      id: vine.number().positive().optional(),
       numero: vine.string().trim().minLength(5).maxLength(50).optional(),
       immatriculation: vine.string().trim().minLength(5).maxLength(20).optional(),
       dateDelivrance: vine.date().optional(),
@@ -118,7 +118,7 @@ export const updateVehiculeWithRelationsValidator = vine.compile(
       documentPdf: vine.string().trim().maxLength(255).optional(),
     }).optional(),
     assurance: vine.object({
-      id: vine.number().positive(),
+      id: vine.number().positive().optional(),
       numeroContrat: vine.string().trim().minLength(5).maxLength(50).optional(),
       companie: vine.string().trim().minLength(2).maxLength(100).optional(),
       dateDebut: vine.date().optional(),
@@ -126,21 +126,21 @@ export const updateVehiculeWithRelationsValidator = vine.compile(
       documentPdf: vine.string().trim().maxLength(255).optional(),
     }).optional(),
     vignette: vine.object({
-      id: vine.number().positive(),
+      id: vine.number().positive().optional(),
       dateDelivrance: vine.date().optional(),
       dateExpiration: vine.date().optional(),
       montant: vine.number().positive().optional(),
       documentPdf: vine.string().trim().maxLength(255).optional(),
     }).optional(),
     visiteTechnique: vine.object({
-      id: vine.number().positive(),
+      id: vine.number().positive().optional(),
       centre: vine.string().trim().minLength(2).maxLength(100).optional(),
       dateDernierControle: vine.date().optional(),
       dateExpirationControle: vine.date().optional(),
       documentPdf: vine.string().trim().maxLength(255).optional(),
     }).optional(),
     carteBleue: vine.object({
-      id: vine.number().positive(),
+      id: vine.number().positive().optional(),
       numero: vine.string().trim().minLength(5).maxLength(50).optional(),
       type: vine.enum(['Essence', 'Diesel', 'Électrique', 'Hybride']).optional(),
       dateDelivrance: vine.date().optional(),

@@ -129,11 +129,8 @@ export class AssuranceService {
    * Récupérer l'assurance active d'un véhicule
    */
   async getActiveByVehiculeId(vehiculeId: number) {
-    const today = DateTime.now().toJSDate()
     const assurance = await Assurance.query()
-      .where('vehiculeId', vehiculeId)
-      .where('date_expiration', '>=', today)
-      .orderBy('date_expiration', 'desc')
+      .where('vehicule_id', vehiculeId)
       .firstOrFail()
     
     await assurance.load('vehicule')
