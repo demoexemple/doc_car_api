@@ -186,6 +186,49 @@ export class VehiculeService {
   }
 
   /**
+   * Mettre à jour un véhicule avec toutes ses relations
+   */
+  async updateWithRelations(id: number, payload: any) {
+    // Mettre à jour le véhicule principal
+    const vehicule = await this.update(id, payload)
+
+    // Mettre à jour la carte grise si présente
+    if (payload.carteGrise && payload.carteGrise.id) {
+      const carteGriseService = await import('./carte_grise_service.js').then(m => new m.CarteGriseService())
+      await carteGriseService.update(payload.carteGrise.id, payload.carteGrise)
+    }
+    // Mettre à jour l'assurance si présente
+    if (payload.assurance && payload.assurance.id) {
+      const assuranceService = await import('./assurance_service.js').then(m => new m.AssuranceService())
+      await assuranceService.update(payload.assurance.id, payload.assurance)
+    }
+    // Mettre à jour la vignette si présente
+    if (payload.vignette && payload.vignette.id) {
+      const vignetteService = await import('./vignette_service.js').then(m => new m.VignetteService())
+      await vignetteService.update(payload.vignette.id, payload.vignette)
+    }
+    // Mettre à jour la visite technique si présente
+    if (payload.visiteTechnique && payload.visiteTechnique.id) {
+      const visiteTechniqueService = await import('./visite_technique_service.js').then(m => new m.VisiteTechniqueService())
+      await visiteTechniqueService.update(payload.visiteTechnique.id, payload.visiteTechnique)
+    }
+    // Mettre à jour la carte bleue si présente
+    if (payload.carteBleue && payload.carteBleue.id) {
+      const carteBleueService = await import('./carte_bleue_service.js').then(m => new m.CarteBleueService())
+      await carteBleueService.update(payload.carteBleue.id, payload.carteBleue)
+    }
+    // Recharger toutes les relations
+    await vehicule.load('proprietaire')
+    await vehicule.load('conducteurs')
+    await vehicule.load('carteGrise')
+    await vehicule.load('assurance')
+    await vehicule.load('vignette')
+    await vehicule.load('visiteTechnique')
+    await vehicule.load('carteBleue')
+    return vehicule
+  }
+
+  /**
    * Supprimer un véhicule
    */
   async delete(id: number) {

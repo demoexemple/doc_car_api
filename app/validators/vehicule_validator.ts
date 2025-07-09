@@ -102,6 +102,54 @@ export const updateVehiculeValidator = vine.compile(
   })
 )
 
+export const updateVehiculeWithRelationsValidator = vine.compile(
+  vine.object({
+    marque: vine.string().trim().minLength(2).maxLength(100).optional(),
+    modele: vine.string().trim().minLength(2).maxLength(100).optional(),
+    type: vine.string().trim().minLength(2).maxLength(50).optional(),
+    usages: vine.string().trim().maxLength(100).optional(),
+    proprietaireId: vine.number().positive().optional(),
+    carteGrise: vine.object({
+      id: vine.number().positive(),
+      numero: vine.string().trim().minLength(5).maxLength(50).optional(),
+      immatriculation: vine.string().trim().minLength(5).maxLength(20).optional(),
+      dateDelivrance: vine.date().optional(),
+      dateExpiration: vine.date().optional(),
+      documentPdf: vine.string().trim().maxLength(255).optional(),
+    }).optional(),
+    assurance: vine.object({
+      id: vine.number().positive(),
+      numeroContrat: vine.string().trim().minLength(5).maxLength(50).optional(),
+      companie: vine.string().trim().minLength(2).maxLength(100).optional(),
+      dateDebut: vine.date().optional(),
+      dateExpiration: vine.date().optional(),
+      documentPdf: vine.string().trim().maxLength(255).optional(),
+    }).optional(),
+    vignette: vine.object({
+      id: vine.number().positive(),
+      dateDelivrance: vine.date().optional(),
+      dateExpiration: vine.date().optional(),
+      montant: vine.number().positive().optional(),
+      documentPdf: vine.string().trim().maxLength(255).optional(),
+    }).optional(),
+    visiteTechnique: vine.object({
+      id: vine.number().positive(),
+      centre: vine.string().trim().minLength(2).maxLength(100).optional(),
+      dateDernierControle: vine.date().optional(),
+      dateExpirationControle: vine.date().optional(),
+      documentPdf: vine.string().trim().maxLength(255).optional(),
+    }).optional(),
+    carteBleue: vine.object({
+      id: vine.number().positive(),
+      numero: vine.string().trim().minLength(5).maxLength(50).optional(),
+      type: vine.enum(['Essence', 'Diesel', 'Électrique', 'Hybride']).optional(),
+      dateDelivrance: vine.date().optional(),
+      dateExpiration: vine.date().optional(),
+      documentPdf: vine.string().trim().maxLength(255).optional(),
+    }).optional(),
+  })
+)
+
 /**
  * Validateur pour l'ajout d'un conducteur à un véhicule
  */
