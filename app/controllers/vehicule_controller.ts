@@ -180,7 +180,6 @@ export default class VehiculeController {
     try {
       const vehicule = await this.vehiculeService.getById(params.id)
 
-      console.log("on est dans la fonction ici")
 
       // Charger tous les éléments associés
       const result: {
