@@ -309,6 +309,7 @@ export default class VehiculeController {
    * Retirer un conducteur d'un véhicule
    */
   async removeConducteur({ params, response }: HttpContext) {
+    console.log(" dans le controlleur")
     try {
       const vehicule = await this.vehiculeService.removeConducteur(params.id, params.conducteurId)
 
