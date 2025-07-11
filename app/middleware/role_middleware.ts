@@ -3,6 +3,7 @@ import { NextFn } from '@adonisjs/core/types/http'
 
 export default class RoleMiddleware {
   async handle(ctx: HttpContext, next: NextFn, guards: string[]) {
+    console.log("dans le midlweare")
     try {
       await ctx.auth.authenticate()
       

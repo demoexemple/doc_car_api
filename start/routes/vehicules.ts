@@ -44,3 +44,5 @@ router.group(() => {
   }).where('id', router.matchers.number())
   
 }).prefix('/vehicules').use(middleware.auth()) 
+
+router.get('/extern/scan/vehicules/:id',[VehiculeController,'show'])

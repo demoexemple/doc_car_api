@@ -1,7 +1,7 @@
 import { HttpContext } from '@adonisjs/core/http'
 import { AuthService } from '#services/auth_service'
 import { inject } from '@adonisjs/core'
-import { registerValidator, updateProfileValidator } from '#validators/auth_validator'
+import { changePasswordValidator, registerValidator, updateProfileValidator } from '#validators/auth_validator'
 import { errors } from '@vinejs/vine'
 
 @inject()
@@ -103,7 +103,9 @@ export default class AuthController {
   async changePassword({ request, response, auth }: HttpContext) {
     try {
       const user = auth.user!
-      const { currentPassword, newPassword } = request.only(['currentPassword', 'newPassword'])
+      const {currentPassword,newPassword} = request.only(['currentPassword', 'newPassword'])
+
+      await changePasswordValidator.validate({currentPassword,newPassword})
       
       await this.authService.changePassword(user.id, currentPassword, newPassword)
       
@@ -223,6 +225,7 @@ export default class AuthController {
    * Récupérer tous les utilisateurs (admin seulement)
    */
   async getAllUsers({ response }: HttpContext) {
+
     try {
       const users = await this.authService.getAllUsers()
       

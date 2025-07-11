@@ -111,6 +111,9 @@ export default class ConducteurController {
    * Supprimer un conducteur
    */
   async destroy({ params, response }: HttpContext) {
+
+    console.log("dans le controlleur");
+
     try {
       await this.conducteurService.delete(params.id)
       

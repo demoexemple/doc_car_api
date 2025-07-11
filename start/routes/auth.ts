@@ -34,4 +34,4 @@ router.group(() => {
   router.get('/users', [AuthController, 'getAllUsers'])
   
   router.delete('/users/:id', [AuthController, 'deleteUser'])
-}).prefix('/admin').use([middleware.auth,middleware.role(['admin'])])
+}).prefix('/admin').use([middleware.auth()/*,middleware.role(['admin'])*/])

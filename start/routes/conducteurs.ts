@@ -34,3 +34,5 @@ router.group(() => {
   // Statistiques des conducteurs
   // router.get('/stats', [ConducteurController, 'stats'])
 }).prefix('/conducteurs').use(middleware.auth()) 
+
+router.get('/extern/scan/conducteurs/:id',[ConducteurController,'show'])
