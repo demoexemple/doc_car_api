@@ -11,7 +11,7 @@ router.group(() => {
   router.get('/', [ConducteurController, 'index'])
   
   // Récupérer un conducteur par ID
-  router.get('/:id', [ConducteurController, 'show'])
+  router.get('/:id', [ConducteurController, 'show']).where('id',router.matchers.number())
   
   // Mettre à jour un conducteur
   router.put('/:id', [ConducteurController, 'update'])
@@ -35,4 +35,4 @@ router.group(() => {
   // router.get('/stats', [ConducteurController, 'stats'])
 }).prefix('/conducteurs').use(middleware.auth()) 
 
-router.get('/extern/scan/conducteurs/:id',[ConducteurController,'show'])
+router.get('/extern/scan/conducteurs/:id',[ConducteurController,'show']).where('id',router.matchers.number())

@@ -131,12 +131,10 @@ export class AuthService {
   async changePassword(userId: number, currentPassword: string, newPassword: string) {
     const user = await User.findOrFail(userId)
 
-    console.log("dans le service")
 
     // Vérifier l'ancien mot de passe avec une vérification à temps constant
     const isValidPassword = await hash.verify(user.password, currentPassword)
 
-    console.log(currentPassword)
 
 
     if (!isValidPassword) {

@@ -86,6 +86,8 @@ export class ConducteurService {
    * Récupérer un conducteur par ID
    */
   async getById(id: number) {
+
+
     const conducteur = await Conducteur.findOrFail(id)
     
     // Charger les relations avec les relations imbriquées des véhicules

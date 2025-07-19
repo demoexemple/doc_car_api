@@ -67,7 +67,6 @@ export default class AuthController {
    * Mise à jour du profil utilisateur
    */
   async update({ request, response, auth }: HttpContext) {
-    console.log("ici")
     try {
       const user = auth.user!
       const updateData = request.only(['fullName', 'email', 'role'])

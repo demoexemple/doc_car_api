@@ -68,6 +68,8 @@ export default class ConducteurController {
    */
   async show({ params, response }: HttpContext) {
     try {
+
+
       const conducteur = await this.conducteurService.getById(params.id)
       
       return response.status(200).json({
@@ -112,7 +114,6 @@ export default class ConducteurController {
    */
   async destroy({ params, response }: HttpContext) {
 
-    console.log("dans le controlleur");
 
     try {
       await this.conducteurService.delete(params.id)

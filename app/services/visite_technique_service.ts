@@ -130,13 +130,11 @@ export class VisiteTechniqueService {
    * Récupérer la visite technique active d'un véhicule
    */
   async getActiveByVehiculeId(vehiculeId: number) {
-    console.log("dans la visite technique")
     const visite = await VisiteTechnique.query()
       .where('vehicule_id', vehiculeId)
       .firstOrFail()
     // await visite.load('vehicule')
 
-    console.log("visite : ",visite)
     return visite
   }
 
