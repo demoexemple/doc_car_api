@@ -27,6 +27,10 @@ export default class Vehicule extends BaseModel {
   @column()
   declare usages: string
 
+  
+  @column()
+  declare voler: boolean
+
   // @column()
   // declare immatriculation: string
 

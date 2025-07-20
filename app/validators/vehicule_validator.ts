@@ -11,6 +11,7 @@ export const createVehiculeValidator = vine.compile(
     type: vine.string().trim().minLength(2).maxLength(50),
     usages: vine.string().trim().maxLength(100).optional(),
     proprietaireId: vine.number().positive(),
+    voler:vine.boolean().optional()
   })
 )
 
@@ -99,6 +100,8 @@ export const updateVehiculeValidator = vine.compile(
     type: vine.string().trim().minLength(2).maxLength(50).optional(),
     usages: vine.string().trim().maxLength(100).optional(),
     proprietaireId: vine.number().positive().optional(),
+    voler:vine.boolean().optional()
+
   })
 )
 
@@ -109,6 +112,7 @@ export const updateVehiculeWithRelationsValidator = vine.compile(
     type: vine.string().trim().minLength(2).maxLength(50).optional(),
     usages: vine.string().trim().maxLength(100).optional(),
     proprietaireId: vine.number().positive().optional(),
+    voler:vine.boolean().optional(),
     carteGrise: vine.object({
       id: vine.number().positive().optional(),
       numero: vine.string().trim().minLength(5).maxLength(50).optional(),

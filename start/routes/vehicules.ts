@@ -37,7 +37,14 @@ router.group(() => {
     const service = new VehiculeService()
     try {
       const vehicule = await service.updateWithRelations(Number(params.id), payload)
-      return response.ok(vehicule)
+      return response.ok({
+          success: true,
+          message: 'Véhicule créé avec succès',
+          data: vehicule
+        })
+
+      
+
     } catch (error) {
       return response.badRequest({ message: error.message })
     }
