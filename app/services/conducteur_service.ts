@@ -1,7 +1,6 @@
 import { inject } from '@adonisjs/core'
 import Conducteur from '#models/Conducteur'
 import Vehicule from '#models/Vehicule'
-import PermisDeConduire from '#models/PermisDeConduire'
 
 export interface ConducteurData {
   prenom: string
