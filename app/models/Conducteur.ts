@@ -1,6 +1,6 @@
 // Conducteur.ts
-import { BaseModel, column, hasMany, hasOne, manyToMany } from '@adonisjs/lucid/orm'
-import type { HasMany, HasOne, ManyToMany } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column, hasMany, manyToMany } from '@adonisjs/lucid/orm'
+import type { HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
 import PermisDeConduire from './PermisDeConduire.js'
 import Vehicule from './Vehicule.js' // Import Vehicule
 import { DateTime } from 'luxon'

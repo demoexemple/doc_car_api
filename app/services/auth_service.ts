@@ -1,9 +1,7 @@
 import { inject } from '@adonisjs/core'
 import User from '#models/user'
 import hash from '@adonisjs/core/services/hash'
-import { DateTime } from 'luxon'
 import { AccessToken } from '@adonisjs/auth/access_tokens'
-import { Secret } from '@adonisjs/core/helpers'
 
 export interface UserData {
   fullName?: string

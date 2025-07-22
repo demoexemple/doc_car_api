@@ -282,7 +282,7 @@ export class VehiculeService {
   async addConducteur(vehiculeId: number, conducteurId: number) {
 
     const vehicule = await Vehicule.findOrFail(vehiculeId)
-    const conducteur = await Conducteur.findOrFail(conducteurId)
+    await Conducteur.findOrFail(conducteurId)
 
 
     // Vérifier si la relation existe déjà
