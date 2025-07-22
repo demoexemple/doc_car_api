@@ -8,8 +8,6 @@ import type { HasMany, ManyToMany, BelongsTo, HasOne } from '@adonisjs/lucid/typ
 import CarteBleue from './CarteBleue.js'
 import { DateTime } from 'luxon'
 import Conducteur from './Conducteur.js'
-import User from './user.js'
-import { idText } from 'typescript'
 
 export default class Vehicule extends BaseModel {
   @column({ isPrimary: true })

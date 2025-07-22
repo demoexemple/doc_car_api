@@ -1,7 +1,6 @@
 import { inject } from '@adonisjs/core'
 import Conducteur from '#models/Conducteur'
 import Vehicule from '#models/Vehicule'
-import PermisDeConduire from '#models/PermisDeConduire'
 
 export interface ConducteurData {
   prenom: string
@@ -161,7 +160,7 @@ export class ConducteurService {
    */
   async addVehicule(conducteurId: number, vehiculeId: number) {
     const conducteur = await Conducteur.findOrFail(conducteurId)
-    const vehicule = await Vehicule.findOrFail(vehiculeId)
+     await Vehicule.findOrFail(vehiculeId)
 
     // Vérifier si la relation existe déjà
     const existingRelation = await conducteur.related('vehicules').query()

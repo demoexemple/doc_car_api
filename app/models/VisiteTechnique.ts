@@ -1,5 +1,5 @@
 // VisiteTechnique.ts
-import { BaseModel, column, belongsTo, computed, dateTimeColumn } from '@adonisjs/lucid/orm'
+import { BaseModel, column, belongsTo, computed } from '@adonisjs/lucid/orm'
 import Vehicule from './Vehicule.js'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import { DateTime } from 'luxon'
