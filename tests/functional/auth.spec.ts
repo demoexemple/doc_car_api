@@ -1,5 +1,5 @@
 // import { test } from '@japa/runner'
-// import { UserFactory } from '#database/factories/user_factory'
+// import { UserFactory } from '#factories/user_factory'
 
 // test.group('Auth API', (group) => {
 //   group.each.setup(async () => {

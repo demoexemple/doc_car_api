@@ -160,7 +160,7 @@ export class ConducteurService {
    */
   async addVehicule(conducteurId: number, vehiculeId: number) {
     const conducteur = await Conducteur.findOrFail(conducteurId)
-     await Vehicule.findOrFail(vehiculeId)
+      await Vehicule.findOrFail(vehiculeId)
 
     // Vérifier si la relation existe déjà
     const existingRelation = await conducteur.related('vehicules').query()
