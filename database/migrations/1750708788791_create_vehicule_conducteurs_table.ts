@@ -10,7 +10,7 @@ export default class extends BaseSchema {
       table.integer('conducteur_id').unsigned().references('id').inTable('conducteurs').onDelete('CASCADE').notNullable()
       table.unique(['vehicule_id', 'conducteur_id']) // Ensures a unique pair
 
-      table.timestamp('created_at', { useTz: true }).notNullable()
+      table.timestamp('created_at', { useTz: true }).notNullable().defaultTo(this.now())
       table.timestamp('updated_at', { useTz: true }).nullable()
     })
   }
