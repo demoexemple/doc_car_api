@@ -8,6 +8,7 @@
 */
 
 import router from '@adonisjs/core/services/router'
+import { HttpContext } from '@adonisjs/core/http'
 
 // Routes publiques
 router.get('/', async () => {
@@ -28,3 +29,47 @@ import './routes/auth.js'
 import './routes/vehicules.js'
 import './routes/conducteurs.js'
 import './routes/permis_de_conduire.js'
+import Vehicule from '#models/Vehicule'
+import Conducteur from '#models/Conducteur'
+import User from '#models/user'
+
+
+router.get('/stats',async({response}:HttpContext )=>{
+
+  try {
+    
+    const vehicules=await Vehicule.query().select(['id','voler'])
+  const conducteurs =await Conducteur.query().select('id')
+
+  const users=await User.query().select('id')
+
+  const vehiculeVoler=[]
+
+  for (const v of vehicules) {
+    if(v.voler){
+      vehiculeVoler.push(v)
+    }
+  }
+
+   return response.status(200).json({
+        data:{
+          vehicules:vehicules.length,
+          users:users.length,
+          conducteurs:conducteurs.length
+        },
+        success: true,
+        message: 'Conducteur supprimé avec succès'
+      })
+
+  } catch (error) {
+     return response.status(400).json({
+        success: false,
+        message: error.message || 'Erreur lors de la recuperation des statistiques du system'
+      })
+  }
+
+  
+
+  
+
+})
