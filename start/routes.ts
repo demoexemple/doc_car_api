@@ -73,3 +73,12 @@ router.get('/stats',async({response}:HttpContext )=>{
   
 
 })
+
+router.get("/demo",()=>{
+  return [
+    {
+      id:"1",
+      name:"demo"
+    }
+  ]
+})
