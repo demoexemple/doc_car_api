@@ -32,6 +32,7 @@ import './routes/permis_de_conduire.js'
 import Vehicule from '#models/Vehicule'
 import Conducteur from '#models/Conducteur'
 import User from '#models/user'
+import { messages } from '@vinejs/vine/defaults'
 
 
 router.get('/stats',async({response}:HttpContext )=>{
@@ -74,11 +75,15 @@ router.get('/stats',async({response}:HttpContext )=>{
 
 })
 
-router.get("/demo",()=>{
-  return [
+router.get("/",async({response}:HttpContext )=>{
+  response.send({message:"Ok , demo"})
+})
+
+router.get("/demo",async({response}:HttpContext )=>{
+  return response.json( [
     {
       id:"1",
       name:"demo"
     }
-  ]
+  ])
 })
