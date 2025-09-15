@@ -75,9 +75,9 @@ router.get('/stats',async({response}:HttpContext )=>{
 
 })
 
-router.get("/",async({response}:HttpContext )=>{
-  response.send({message:"Ok , demo"})
-})
+// router.get("/",async({response}:HttpContext )=>{
+//   response.send({message:"Ok , demo"})
+// })
 
 router.get("/demo",async({response}:HttpContext )=>{
   return response.json( [
