@@ -83,7 +83,8 @@ router.get("/demo",async({response}:HttpContext )=>{
   return response.json( [
     {
       id:"1",
-      name:"demo"
+      name:"demo",
+      age:23
     }
   ])
 })
